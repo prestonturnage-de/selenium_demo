@@ -1,6 +1,6 @@
 [tool.black]
 line-length = 160
-target-version = ['py312']
+target-version = ['py313']
 
 [tool.isort]
 append_only = true

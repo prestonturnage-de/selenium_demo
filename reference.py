@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 options = webdriver.ChromeOptions()
 options.headless = True
 DRIVER_URL = "http://localhost:4444"
-driver = webdriver.Remote(command_executor=DRIVER_URL, options = options)
+driver = webdriver.Remote(command_executor=DRIVER_URL, options=options)
 
 driver.get("https://www.selenium.dev/selenium/web/web-form.html")
 

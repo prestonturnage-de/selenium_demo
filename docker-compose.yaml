@@ -1,6 +1,6 @@
 services:
   selenium_chrome:
-    image: selenium/standalone-chrome:latest 
+    image: selenium/standalone-chrome:latest
     shm_size: 2gb
     ports:
       - 127.0.0.1:4444:4444
@@ -11,7 +11,7 @@ services:
       timeout: 10s
       retries: 3
     environment:
-      - SE_OPTS=--log-level OFF 
+      - SE_OPTS=--log-level OFF
   tests:
     build:
       context: .
@@ -20,4 +20,3 @@ services:
       - selenium_chrome
     environment:
       - SELENIUM_HOST=selenium_chrome:4444
-

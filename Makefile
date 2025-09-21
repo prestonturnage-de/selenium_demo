@@ -1,5 +1,5 @@
 build:
-	docker compose build 
+	docker compose build
 
 test: build
 	docker compose up tests
@@ -9,4 +9,3 @@ start:
 
 stop:
 	docker compose down selenium_chrome
-
