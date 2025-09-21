@@ -1,0 +1,11 @@
+[tool.black]
+line-length = 160
+target-version = ['py312']
+
+[tool.isort]
+append_only = true
+line_length = 160
+combine_as_imports = true
+skip = ["build", ".tox", "venv"]
+skip_glob = ["*.pya"]
+profile = "black"
