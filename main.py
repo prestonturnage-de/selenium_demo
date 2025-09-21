@@ -9,6 +9,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 
 def get_webdriver() -> WebDriver:
+    # Retrieve host from environment
     host = os.getenv("SELENIUM_HOST", "http://localhost:4444")
     options = webdriver.ChromeOptions()
     options.headless = True
