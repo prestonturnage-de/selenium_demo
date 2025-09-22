@@ -9,7 +9,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 
 def get_webdriver() -> WebDriver:
-    # Retrieve host from environment
+    """Retrieve host from environment, initiate, and return the webdriver"""
     host = os.getenv("SELENIUM_HOST", "http://localhost:4444")
     options = webdriver.ChromeOptions()
     options.headless = True
@@ -18,10 +18,16 @@ def get_webdriver() -> WebDriver:
 
 
 def wait(driver: WebDriver) -> WebDriverWait:
+    """Cause the webdriver to wait 5 seconds, because in some cases the docker container is ready before the selenium service is fully up and running"""
     return WebDriverWait(driver=driver, timeout=5)
 
 
 def main(str_args):
+    """Instanciate the selenium webdriver, then use it to run a couple of simple tests.
+    Currently, the tests will verify that:
+        There are more than 40 records present in the ranks_table
+        The elements present in the main-navigation bar match the expected elements
+    """
     driver = get_webdriver()
     try:
         url = "https://www.harrisfootball.com/rb-ranks"
@@ -36,16 +42,6 @@ def main(str_args):
         print("Testing to ensure that there are at least 40 ranks being displayed...")
         assert len(ranks_list) > 40, "There mustbe at least 40 ranks present here"
         print("Success")
-
-        """
-        all_names = "".join(ranks_list)
-        letter_counts = Counter(all_names)
-        letter_frequency_in_names = {key: value/len(all_names) for key, value in letter_counts.items()}
-        squared_distance = 0
-        for letter in ascii_lowercase:
-            squared_distance += (letter_frequency_in_names.get(letter, 0) - base_frequency[letter])**2
-        distance = sqrt(squared_distance)
-        """
 
         nav_window = driver.find_element(By.ID, "main-navigation")
         unordered_list = nav_window.find_element(By.TAG_NAME, "ul")
@@ -84,11 +80,3 @@ def run():
 
 if __name__ == "__main__":
     run()
-    """
-    find freq for each letter in names
-    hard code freq of letters in english (dict)
-    find cartesian distance between frequencies
-    d = sqrt((a1- a2)^2 + (b1 - b2)^2... (z1- z2)^2)
-    a1 = source frequency (from player names)
-    a2 = ref frequency (from hard coded dictionary)
-    """
